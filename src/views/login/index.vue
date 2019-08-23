@@ -49,7 +49,13 @@ export default {
   },
   methods: {
     login () {
-      this.$refs.loginpage.validate()
+      // validate手动校验表单数据
+      this.$refs.loginpage.validate(isOK => {
+        // 通过校验
+        if (isOK) {
+          console.log('校验成功')
+        }
+      })
     }
   }
 }
