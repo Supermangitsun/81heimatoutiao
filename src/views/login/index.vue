@@ -12,8 +12,9 @@
               <el-button style="float:right">获取验证码</el-button>
            </el-form-item>
            <el-form-item prop="deal">
-              <el-checkbox v-model="formData.deal">我已阅读并同意<a style="color:red" href="#">用户协议</a> 和 <a style="color:red">隐私条款</a></el-checkbox>
+              <el-checkbox  v-model="formData.deal">我已阅读并同意<a style="color:red" href="#">用户协议</a> 和 <a style="color:red">隐私条款</a></el-checkbox>
             </el-form-item>
+
          <el-row>
            <el-button @click="login" class="last-button" type="primary">登录</el-button>
          </el-row>
@@ -26,6 +27,17 @@
 // 定义数据
 export default {
   data () {
+    // 在运行之前将定义function()用于自定义函数validator
+    let func = function (rule, value, callback) {
+      // rule 是当前的校验规则，没用，value是当前表单字段的值，callback执行下一段代码
+      if (value) {
+        // 满足校验
+        callback()// 同意继续往下走
+      } else {
+        // 不满足
+        callback(new Error('您必须同意呦'))// 错误抛出信息
+      }
+    }
     return {
       formData: {
         cell: '',
@@ -42,7 +54,8 @@ export default {
           { pattern: /^\d{6}$/, message: '请输入正确的验证码' }
         ],
         deal: [
-          { type: 'date', required: true, message: '请仔细阅读条款' }
+          // 经过测试发现如果选择一次在选择第二次的话就会出现bug，所以现在需要使用自定义函数validator
+          { validator: func }
         ]
       }
     }
