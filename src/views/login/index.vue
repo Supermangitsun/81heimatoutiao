@@ -83,6 +83,15 @@ export default {
             window.localStorage.setItem('user-info', JSON.stringify(result.data.data))
             // 编程式导航
             this.$router.push('/home')
+            // 当用户账号或者密码输入错误时，给予提示
+          }).catch(() => {
+            // $message是element注入到vue中的实例
+            this.$message({
+              message: '当前账号或密码错误',
+              type: 'warning',
+              center: 'true',
+              offset: '100'
+            })
           })
         }
       })
