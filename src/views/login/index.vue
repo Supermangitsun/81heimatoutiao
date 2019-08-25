@@ -4,11 +4,11 @@
          <img src="../../assets/img/logo_index.png" alt="">
          <!-- 放置一个表单-->
          <el-form :model="formData" :rules="rules" ref="loginpage">
-           <el-form-item prop="cell">
-              <el-input v-model="formData.cell" placeholder="请输入手机号"></el-input>
+           <el-form-item prop="mobile">
+              <el-input v-model="formData.mobile" placeholder="请输入手机号"></el-input>
            </el-form-item>
-           <el-form-item prop="verify">
-              <el-input v-model="formData.verify" placeholder="请输入验证码" style="width:60%"></el-input>
+           <el-form-item prop="code">
+              <el-input v-model="formData.code" placeholder="请输入验证码" style="width:60%"></el-input>
               <el-button style="float:right">获取验证码</el-button>
            </el-form-item>
            <el-form-item prop="deal">
@@ -40,16 +40,16 @@ export default {
     }
     return {
       formData: {
-        cell: '',
-        verify: '',
+        mobile: '',
+        code: '',
         deal: ''
       },
       rules: {
-        cell: [
+        mobile: [
           { required: true, message: '请输入手机号' },
           { pattern: /^1[3456789]\d{9}$/, message: '请输入正确的手机号' }
         ],
-        verify: [
+        code: [
           { required: true, message: '请输入验证码' },
           { pattern: /^\d{6}$/, message: '请输入正确的验证码' }
         ],
@@ -63,10 +63,27 @@ export default {
   methods: {
     login () {
       // validate手动校验表单数据
-      this.$refs.loginpage.validate(isOK => {
+      this.$refs.loginpage.validate((isOK, result) => {
+        // console.log(isOK)// 表单是否通过校验
+        // console.log(result)// 表单打印的结果
         // 通过校验
         if (isOK) {
-          console.log('校验成功')
+          // console.log('校验成功')
+          // 获取数据
+          this.$axios({
+            method: 'post',
+            url: 'authorizations',
+            // post参数是在data中写的
+            data: this.formData
+            // 因为这是axios请求，所以支持链式调用
+          }).then(result => {
+            // 1：将获取的token在前端缓存，以后调用接口的时候不用在请求token
+            // console.log(result.data.data)
+            // 2：因为设置的用户是个对象，所以需要转为字符串
+            window.localStorage.setItem('user-info', JSON.stringify(result.data.data))
+            // 编程式导航
+            this.$router.push('/home')
+          })
         }
       })
     }
