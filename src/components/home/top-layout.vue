@@ -1,6 +1,6 @@
 <template>
   <el-row class="header">
-    <el-col class="item-1" :span="20">
+    <el-col class="item-1" :span="24">
       <i class="el-icon-s-unfold item-2"></i>
       <span>江苏传智播客教育股份有限公司</span>
     </el-col>
@@ -9,7 +9,7 @@
       <el-col>
         <el-dropdown trigger="click">
           <span class="el-dropdown-link">
-            下拉菜单
+            姓名
             <i class="el-icon-arrow-down el-icon--right"></i>
           </span>
           <el-dropdown-menu slot="dropdown">
