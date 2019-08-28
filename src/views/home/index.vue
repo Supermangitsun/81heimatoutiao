@@ -8,7 +8,9 @@
     <!-- 嵌套容器 -->
        <el-container>
            <!-- 上部区域 -->
-            <el-header>头部区域</el-header>
+            <el-header>
+                <top-layout></top-layout>
+            </el-header>
             <!-- 中间区域 -->
             <el-main>中间区域</el-main>
        </el-container>
@@ -17,10 +19,13 @@
 <script>
 // 引用左侧布局组件
 import lestlayout from '../../components/home/lest-layout'
+// 引用头部布局组件
+import toplayout from '../../components/home/top-layout'
 export default {
   // 注册左面布局组件
   components: {
-    'lest-layout': lestlayout
+    'lest-layout': lestlayout,
+    'top-layout': toplayout
   }
 }
 

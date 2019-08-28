@@ -4,35 +4,42 @@
             <img src="../../assets/img/logo_admin.png" alt="">
         </div>
          <el-menu
-      default-active="2"
       class="el-menu-vertical-demo"
-      @open="handleOpen"
-      @close="handleClose"
       background-color="#545c64"
-      text-color="#fff"
+      text-color="#adafb5"
       active-text-color="#ffd04b">
       <!-- el-submenu导航折叠 -->
-      <el-submenu index="1">
+      <el-menu-item>
+        <i class="el-icon-s-home"></i>
+        <span>首页</span>
+        </el-menu-item>
+      <el-submenu>
         <template slot="title">
-          <i class="el-icon-location"></i>
-          <span>导航一</span>
+          <i class="el-icon-collection"></i>
+        <!-- 具名插槽 -->
+        <span>内容管理</span>
         </template>
-       <el-menu-item index="2">
-        <i class="el-icon-menu"></i>
-        <span slot="title">导航二</span>
-      </el-menu-item>
+        <!-- 匿名插槽 -->
+        <el-menu-item>发表文章</el-menu-item>
+        <el-menu-item>内容列表</el-menu-item>
+        <el-menu-item>素材管理</el-menu-item>
+        <el-menu-item>评论列表</el-menu-item>
       </el-submenu>
-      <el-menu-item index="2">
-        <i class="el-icon-menu"></i>
-        <span slot="title">导航二</span>
-      </el-menu-item>
-      <el-menu-item index="3" disabled>
-        <i class="el-icon-document"></i>
-        <span slot="title">导航三</span>
-      </el-menu-item>
-      <el-menu-item index="4">
-        <i class="el-icon-setting"></i>
-        <span slot="title">导航四</span>
+      <el-submenu>
+        <template slot="title">
+          <i class="el-icon-user"></i>
+            <!-- 具名插槽 -->
+        <span>粉丝管理</span>
+        </template>
+        <!-- 匿名插槽 -->
+        <el-menu-item>图文数据</el-menu-item>
+        <el-menu-item>粉丝概况</el-menu-item>
+        <el-menu-item>粉丝画像</el-menu-item>
+        <el-menu-item>粉丝列表</el-menu-item>
+      </el-submenu>
+      <el-menu-item>
+        <i class="el-icon-s-custom"></i>
+        <span>账户信息</span>
       </el-menu-item>
     </el-menu>
     </div>
